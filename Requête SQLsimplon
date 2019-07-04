@@ -1,0 +1,39 @@
+	REPONSES
+    1) Affichage de la liste des pays ou simplon est présent.
+        select * from pays left join fabrique on pays.id = fabrique.id_pays;
++----+---------+--------+------+-----------------+--------------+------------		+------------------------+---------+
+| id | nom     | ville  | id   | nom             | adresse      | tel        | email                  | id_pays |
++----+---------+--------+------+-----------------+--------------+------------+------------------------+---------+
+|  1 | Mali    | Bamako |    1 | Simplon_Mali    | Bamako_Mopti | 2147483647 | simplonmali@gmail.com  |       1 |
+|  2 | Senegal | Dakar  |    2 | Simplon_Senegal | Dakar_Fann   | 2147483647 | simplondakar@gmail.com |       2 |
++----+---------+--------+------+-----------------+--------------+------------+------------------------+---------+
+
+    2) Affichage de la liste des fabriques de la ville de Dakar.
+	UPDATE fabrique SET ville = 'Bamako' WHERE id= 1;
+	UPDATE fabrique SET ville = 'Dakar' WHERE id= 2;
+	select * from fabrique;
++----+-----------------+--------------+------------+------------------------+---------+--------+
+| id | nom             | adresse      | tel        | email                  | id_pays | ville  |
++----+-----------------+--------------+------------+------------------------+---------+--------+
+|  1 | Simplon_Mali    | Bamako_Mopti | 2147483647 | simplonmali@gmail.com  |       1 | Bamako |
+|  2 | Simplon_Senegal | Dakar_Fann   | 2147483647 | simplondakar@gmail.com |       2 | Dakar  |
++----+-----------------+--------------+------------+------------------------+---------+--------+
+	select * from fabrique where id_pays = 2;
++----+-----------------+------------+------------+------------------------+---------+-------+
+| id | nom             | adresse    | tel        | email                  | id_pays | ville |
++----+-----------------+------------+------------+------------------------+---------+-------+
+|  2 | Simplon_Senegal | Dakar_Fann | 2147483647 | simplondakar@gmail.com |       2 | Dakar |
++----+-----------------+------------+------------+------------------------+---------+-------+
+
+    7) L'ordre SQL qui permet d'ajouter un champ 'Ouverte' à la table cohorte  de type boolean. 
+	UPDATE `cohorte` SET `date_debut` = CHAR('2019-04-08'), `date_fin` = CHAR('2019-11-01'), `Ouverte` = '1' WHERE 		`cohorte`.`id` = 1;
+	MariaDB [simplon]> select * from cohorte;
++----+------------+------------+------------------+---------+
+| id | date_debut | date_fin   | nombre_apprenant | Ouverte |
++----+------------+------------+------------------+---------+
+|  1 | 0000-00-00 | 0000-00-00 |               20 | 1       |
+|  2 | 2019-04-01 | 2019-11-04 |               26 | 0       |
++----+------------+------------+------------------+---------+
+    8) Modifier le type du champ sexe au lieu de boolean on met car(1).	
+	ALTER TABLE apprenant change sexe sexe char(1) not null;
+    6) 
